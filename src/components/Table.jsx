@@ -5,7 +5,7 @@ const Table = ()=>{
         <div className="overflow-x-auto p-10 m-10">
   <table className="table table-xs">
     <thead>
-      <tr>
+      <tr className=' font-bold bg-green-600'>
         <th>Boat</th> 
         <th>Dep.Time</th> 
         <th>Arr. Time</th> 

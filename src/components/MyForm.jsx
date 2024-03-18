@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MyForm = () => {
   const [startDate, setStartDate] = useState('');
@@ -13,7 +14,10 @@ const MyForm = () => {
   };
 
   return (
-    <div className="w-[60%]  mx-auto my-8">
+    <div className="hero min-h-screen" style={{backgroundImage: 'url("https://i.ibb.co/MGxNX81/pexels-tom-fisk-1406636.jpg")'}}>
+  <div className="hero-overlay bg-opacity-60"></div>
+  <div className="hero-content text-center text-neutral-content"></div>
+    <div className="w-[40%] h-[50%] shadow-sm  mx-auto my-8">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="flex space-x-4">
           <div className="w-1/2">
@@ -68,14 +72,15 @@ const MyForm = () => {
           />
         </div>
         <div className="flex items-center justify-between">
-          <button
+          <Link to="/Table"
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Search Boat
-          </button>
+          </Link>
         </div>
       </form>
+    </div>
     </div>
   );
 };
