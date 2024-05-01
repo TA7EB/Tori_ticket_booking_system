@@ -25,7 +25,7 @@ const Payment = () => {
 
   </div>
   <div className="divider"></div>
-  <div className="grid h-20 card  place-items-center">content</div>
+  <div className="grid h-20 card  place-items-center">Payment Option</div>
 </div>
 
     </div>

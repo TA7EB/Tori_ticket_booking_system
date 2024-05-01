@@ -2,7 +2,7 @@ import React from 'react'
 
 const FareDetails=()=>{
     return(
-        <div className='flex '>
+        <div className='container'>
             <ul>
                 <li>Fare Details</li>
                 <li>Ticket Price<span>1200</span></li>
