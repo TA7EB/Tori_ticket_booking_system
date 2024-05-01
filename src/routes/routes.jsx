@@ -9,12 +9,13 @@ import SignupPage from "../pages/SignupPage";
 import MyformPage from "../pages/MyformPage";
 import DeparturePage from "../pages/DeparturePage";
 import PaymentPage from "../pages/PaymentPage";
+import PaymentSuccess from "../pages/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
-    errorElement: <ErrorPage/>,
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/Payment",
         element: <PaymentPage></PaymentPage>,
+      },
+      {
+        path: "/Payment-Success",
+        element: <PaymentSuccess />,
       },
     ],
   },

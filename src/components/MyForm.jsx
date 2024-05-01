@@ -1,86 +1,154 @@
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyForm = () => {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
+  let navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    startDate: "",
+    endDate: "" || "Not Specified",
+    fromLocation: "",
+    toLocation: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
+
+    if (!formData.startDate) {
+      return Swal.fire({
+        title: "Oops!!",
+        text: "Date of journey is required!",
+        icon: "warning",
+      });
+    }
+    if (!formData.fromLocation) {
+      return Swal.fire({
+        title: "Oops!!",
+        text: "From Location is required",
+        icon: "warning",
+      });
+    }
+    if (!formData.toLocation) {
+      return Swal.fire({
+        title: "Oops!!",
+        text: "To Location is required",
+        icon: "warning",
+      });
+    }
+
+    localStorage.setItem("rideInfo", JSON.stringify(formData));
+
+    setFormData({
+      startDate: "",
+      endDate: "",
+      fromLocation: "",
+      toLocation: "",
+    });
+
+    navigate("/Table");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
-    <div className="hero min-h-screen" style={{backgroundImage: 'url("https://i.ibb.co/MGxNX81/pexels-tom-fisk-1406636.jpg")'}}>
-  <div className="hero-overlay bg-opacity-60"></div>
-  <div className="hero-content text-center text-neutral-content"></div>
-    <div className="w-[40%] h-[50%] shadow-sm  mx-auto my-8">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <div className="flex space-x-4">
-          <div className="w-1/2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="startDate">
-              Date of Journey
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="startDate"
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+    <div
+      className="hero min-h-screen"
+      style={{
+        backgroundImage:
+          'url("https://i.ibb.co/MGxNX81/pexels-tom-fisk-1406636.jpg")',
+      }}
+    >
+      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-content text-center text-neutral-content"></div>
+      <div className="w-[40%] h-[50%] shadow-sm  mx-auto my-8">
+        <form
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="startDate"
+              >
+                Date of Journey
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="startDate"
+                type="date"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-1/2 mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="endDate"
+              >
+                Date of Return
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="endDate"
+                type="date"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className="w-1/2 mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endDate">
-              Date of Return
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="endDate"
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+
+          <div className="mb-4">
+            <select
+              name="fromLocation"
+              className="w-full outline-none border border-gray-400 p-2 rounded-md"
+              value={formData.fromLocation}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select from where the journey starts
+              </option>
+              <option value="Dhamrai">Dhamrai</option>
+              <option value="Ashulia">Ashulia</option>
+              <option value="Charabag">Charabag</option>
+              <option value="Datta Para">Datta Para</option>
+            </select>
           </div>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="field1">
-            From
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="from"
-            type="text"
-            value={from}
-            onChange={(e) => setFrom(e.target.value)}
-            placeholder='Enter Start'
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="field2">
-            To
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="to"
-            type="text"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-            placeholder='Enter Destination'
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <Link to="/Table"
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Search Boat
-          </Link>
-        </div>
-      </form>
-    </div>
+
+          <div className="mb-6">
+            <select
+              name="toLocation"
+              className="w-full outline-none border border-gray-400 p-2 rounded-md"
+              value={formData.toLocation}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select where the journey ends
+              </option>
+              <option value="Dhanmondi">Dhanmondi</option>
+              <option value="Mirpur">Mirpur</option>
+              <option value="Uttara">Uttara</option>
+              <option value="Kazipara">Kazipara</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Search Boat
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
