@@ -7,6 +7,7 @@ const Payment = () => {
 
   let [rideInfo, setRideInfo] = useState("");
   let [boatInfo, setBoatInfo] = useState("");
+  let [totalFare, setTotalFare] = useState(0);
 
   useEffect(() => {
     const storedRideData = localStorage.getItem("rideInfo");
@@ -55,8 +56,22 @@ const Payment = () => {
     navigate("/Payment-Success");
   };
 
+ 
+
+
+
+
+  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    if(name === "seats"){
+      let totalSeats = value;
+
+     setTotalFare( totalSeats * boatInfo?.fare)
+      
+    }
 
     if (type === "radio" && checked) {
       setFormData({
@@ -71,10 +86,12 @@ const Payment = () => {
     }
   };
 
+
+
   return (
     <div>
-      <div className="w-[60%] mx-auto my-20 border-2 border-teal-400 rounded-lg">
-        <h1 className="text-center bg-teal-400 py-3 text-xl font-bold">
+      <div className="w-[60%] mx-auto my-20 border-2 border-green-400 rounded-lg">
+        <h1 className="text-center bg-green-500 py-3 text-xl font-bold">
           Please fill up the form and confirm your journey
         </h1>
 
@@ -156,13 +173,13 @@ const Payment = () => {
                 <div className="form-control">
                   <label className="label cursor-pointer">
                     <span className="label-text mr-2 text-lg">
-                      Pay {boatInfo.fare} taka offline
+                      Pay {totalFare} taka offline
                     </span>
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="offline"
-                      className="radio checked:bg-teal-500"
+                      className="radio checked:bg-green-500"
                       checked={formData.paymentMethod === "offline"}
                       onChange={handleChange}
                     />
@@ -172,13 +189,14 @@ const Payment = () => {
                 <div className="form-control">
                   <label className="label cursor-pointer">
                     <span className="label-text mr-2 text-lg">
-                      Pay {boatInfo.fare} taka via SSLCOMMERZ
+                      {/* Pay {boatInfo.fare} taka via SSLCOMMERZ */}
+                      Pay {totalFare} taka via SSLCOMMERZ
                     </span>
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="online"
-                      className="radio checked:bg-teal-500"
+                      className="radio checked:bg-green-500"
                       checked={formData.paymentMethod === "online"}
                       onChange={handleChange}
                     />
@@ -187,7 +205,7 @@ const Payment = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn bg-teal-400 hover:bg-teal-400">
+            <button type="submit" className="btn bg-green-500 hover:bg-green-600">
               Confirm Ticket
             </button>
           </form>

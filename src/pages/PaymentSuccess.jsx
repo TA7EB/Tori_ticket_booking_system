@@ -20,10 +20,12 @@ const PaymentSuccess = () => {
     setUserInfo(parsedUserData);
   }, []);
 
+ 
+
   return (
     <div>
       <div className="w-[60%] mx-auto my-20 border-2 border-teal-200 rounded-lg pb-10">
-        <h1 className="text-center bg-teal-200 py-3 text-xl font-bold">
+        <h1 className="text-center bg-green-400 py-3 text-xl font-bold">
           Your ticket has been confirmed ✅
         </h1>
 
@@ -40,7 +42,7 @@ const PaymentSuccess = () => {
             <h1>Departure Time: {boatInfo?.departureTime}</h1>
             <h1>Arrival Time: {boatInfo?.arrivalTime}</h1>
             <h1>Booked Seats: {userInfo?.seats}</h1>
-            <h1>Fare: {boatInfo?.fare}</h1>
+            <h1>Fare: {boatInfo?.fare * parseInt(userInfo?.seats)}</h1>
           </div>
         </div>
 
