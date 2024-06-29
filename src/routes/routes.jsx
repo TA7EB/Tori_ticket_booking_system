@@ -10,6 +10,8 @@ import MyformPage from "../pages/MyformPage";
 import DeparturePage from "../pages/DeparturePage";
 import PaymentPage from "../pages/PaymentPage";
 import PaymentSuccess from "../pages/PaymentSuccess";
+import PrivateRoute from "./PrivateRoute";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -39,19 +41,43 @@ const router = createBrowserRouter([
       },
       {
         path: "/Myform",
-        element: <MyformPage></MyformPage>,
+        element: (
+          <PrivateRoute>
+            <MyformPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/Table",
-        element: <DeparturePage></DeparturePage>,
+        element: (
+          <PrivateRoute>
+            <DeparturePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/Payment",
-        element: <PaymentPage></PaymentPage>,
+        element: (
+          <PrivateRoute>
+            <PaymentPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/Payment-Success",
-        element: <PaymentSuccess />,
+        element: (
+          <PrivateRoute>
+            <PaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

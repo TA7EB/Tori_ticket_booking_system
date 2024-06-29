@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -5,9 +7,13 @@ import Swal from "sweetalert2";
 const Payment = () => {
   let navigate = useNavigate();
 
+
+
+
   let [rideInfo, setRideInfo] = useState("");
   let [boatInfo, setBoatInfo] = useState("");
   let [totalFare, setTotalFare] = useState(0);
+  const [availableSeats, setAvailableSeats] = useState([]);
 
   useEffect(() => {
     const storedRideData = localStorage.getItem("rideInfo");
@@ -20,8 +26,25 @@ const Payment = () => {
     setBoatInfo(parsedBoatData);
   }, []);
 
-  let seats = boatInfo.availableSeat;
-  const availableSeats = Array.from(Array(seats).keys()).map((x) => x + 1);
+  // console.log(boatInfo.available_seat)
+
+  // let seats = boatInfo?.available_seat;
+  
+  // const availableSeats = Array.from(Array(seats).keys()).map((x) => x + 1);
+
+  useEffect(() => {
+    if (boatInfo?.available_seat !== undefined) {
+      const seats = boatInfo.available_seat;
+      const availableSeatsArray = Array.from({ length: seats }, (_, i) => i + 1);
+      setAvailableSeats(availableSeatsArray);
+    }
+  }, [boatInfo]);
+
+  console.log(availableSeats);
+
+
+
+  
 
   // Handle for input
   const [formData, setFormData] = useState({
@@ -51,26 +74,33 @@ const Payment = () => {
       });
     }
 
-    localStorage.setItem("userInfo", JSON.stringify(formData));
+    if (formData.paymentMethod === "online") {
+      fetch("https://tori-sslcommerz.vercel.app/payment/tori/sslcommerz", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...formData, totalFare }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result.url);
+          localStorage.setItem("userInfo", JSON.stringify(formData));
+          window.location.replace(result.url);
+        });
+    }
 
-    navigate("/Payment-Success");
+    if (formData.paymentMethod === "offline") {
+      localStorage.setItem("userInfo", JSON.stringify(formData));
+      navigate("/Payment-Success");
+    }
   };
-
- 
-
-
-
-
-  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if(name === "seats"){
+    if (name === "seats") {
       let totalSeats = value;
 
-     setTotalFare( totalSeats * boatInfo?.fare)
-      
+      setTotalFare(totalSeats * boatInfo?.fare);
     }
 
     if (type === "radio" && checked) {
@@ -88,6 +118,9 @@ const Payment = () => {
 
 
 
+
+ 
+
   return (
     <div>
       <div className="w-[60%] mx-auto my-20 border-2 border-green-400 rounded-lg">
@@ -104,10 +137,10 @@ const Payment = () => {
           </div>
 
           <div>
-            <h1>Boat: {boatInfo?.name}</h1>
-            <h1>Departure Time: {boatInfo?.departureTime}</h1>
-            <h1>Arrival Time: {boatInfo?.arrivalTime}</h1>
-            <h1>Available Seats: {boatInfo?.availableSeat}</h1>
+            <h1>Boat: {boatInfo?.boat}</h1>
+            <h1>Departure Time: {boatInfo?.dep_time}</h1>
+            <h1>Arrival Time: {boatInfo?.arr_time}</h1>
+            <h1>Available Seats: {boatInfo?.available_seat}</h1>
             <h1>Fare: {boatInfo?.fare}</h1>
           </div>
         </div>
@@ -150,22 +183,20 @@ const Payment = () => {
               onChange={handleChange}
               className="input input-bordered input-primary w-full max-w-xs"
             />
-
-            <select
-              className="select select-bordered w-full max-w-xs"
-              name="seats"
-              onChange={handleChange}
-            >
-              <option disabled selected>
-                How many seats do you need?
-              </option>
-
-              {availableSeats.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+<select
+        className="select select-bordered w-full max-w-xs"
+        name="seats"
+        onChange={handleChange}
+      >
+        <option disabled selected>
+          How many seats do you need?
+        </option>
+        {availableSeats.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
 
             <div className="flex flex-col justify-center items-center gap-3 mt-4">
               <h1 className="text-lg font-bold">Payment Method</h1>
@@ -205,7 +236,10 @@ const Payment = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn bg-green-500 hover:bg-green-600">
+            <button
+              type="submit"
+              className="btn bg-green-500 hover:bg-green-600"
+            >
               Confirm Ticket
             </button>
           </form>

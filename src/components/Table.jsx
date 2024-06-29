@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Table = () => {
   const [formData, setFormData] = useState(null);
@@ -11,30 +13,26 @@ const Table = () => {
     setFormData(parsedFormData);
   }, []);
 
-  let availableBoats = [
-    {
-      name: "Sampan-3",
-      departureTime: "10:00 AM",
-      arrivalTime: "11:30 AM",
-      availableSeat: 20,
-      fare: 90,
+  let { data, isLoading } = useQuery({
+    queryKey: ["schedules"],
+    queryFn: async () => {
+      let res = await axios.post(`http://127.0.0.1:8000/api/list_schedule`).then();
+      return res.data;
     },
-    {
-      name: "Sampan-5",
-      departureTime: "10:30 AM",
-      arrivalTime: "11:45 AM",
-      availableSeat: 12,
-      fare: 100,
-    },
-    {
-      name: "Sampan-9",
-      departureTime: "09:30 AM",
-      arrivalTime: "10:45 AM",
-      availableSeat: 8,
-      fare: 120,
-    },
-  ];
+  });
 
+  if(isLoading){
+    return <div>Loading.....</div>
+  }
+
+
+
+
+
+
+  console.log(data)
+
+  
   let handleProceedToPayment = (boatInfo) => {
     localStorage.setItem("boatInfo", JSON.stringify(boatInfo));
     navigate("/Payment");
@@ -58,12 +56,12 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {availableBoats.map((item, index) => (
+          {data.data.map((item, index) => (
             <tr key={index}>
-              <td className="text-lg">{item.name}</td>
-              <td className="text-lg">{item.departureTime}</td>
-              <td className="text-lg">{item.arrivalTime}</td>
-              <td className="text-lg">{item.availableSeat}</td>
+              <td className="text-lg">{item.boat}</td>
+              <td className="text-lg">{item.dep_time}</td>
+              <td className="text-lg">{item.arr_time}</td>
+              <td className="text-lg">{item.available_seat}</td>
               <td className="text-lg">{item.fare}</td>
               <td className="text-lg">
                 <button
