@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const DriverTable = () => {
   let { data, refetch } = useQuery({
@@ -55,7 +56,7 @@ const DriverTable = () => {
     <div>
       <div className="overflow-x-auto">
         <button
-          className="btn btn-accent mb-5"
+          className="btn btn-primary mb-5"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
           Add Driver
@@ -142,15 +143,15 @@ const DriverTable = () => {
           </div>
         </dialog>
 
-        <table className="table bg-gray-400">
+        <table className="table bg-white">
           {/* head */}
           <thead>
             <tr>
               <th></th>
-              <th className="text-lg text-white">Driver Name</th>
-              <th className="text-lg text-white">Contact</th>
-              <th className="text-lg text-white">Join Date </th>
-              <th className="text-lg text-white">Action </th>
+              <th className="text-lg text-black">Driver Name</th>
+              <th className="text-lg text-black">Contact</th>
+              <th className="text-lg text-black">Join Date </th>
+              <th className="text-lg text-black">Action </th>
             </tr>
           </thead>
           <tbody>

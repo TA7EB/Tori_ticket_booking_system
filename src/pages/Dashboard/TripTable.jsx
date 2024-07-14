@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const TripTable = () => {
   let { data, refetch } = useQuery({
@@ -56,7 +57,7 @@ const TripTable = () => {
     <div>
       <div className="overflow-x-auto">
         <button
-          className="btn btn-accent mb-5"
+          className="btn btn-primary mb-5"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
           Add a trip
@@ -179,16 +180,16 @@ const TripTable = () => {
           </div>
         </dialog>
 
-        <table className="table bg-gray-400">
+        <table className="table bg-white">
           {/* head */}
           <thead>
             <tr>
               <th></th>
-              <th className="text-lg text-white">Boat Name</th>
-              <th className="text-lg text-white">Departure Time</th>
-              <th className="text-lg text-white">Arrival Time</th>
-              <th className="text-lg text-white">Seats</th>
-              <th className="text-lg text-white">Fare</th>
+              <th className="text-lg text-black">Boat Name</th>
+              <th className="text-lg text-black">Departure Time</th>
+              <th className="text-lg text-black">Arrival Time</th>
+              <th className="text-lg text-black">Seats</th>
+              <th className="text-lg text-black">Fare</th>
              
             </tr>
           </thead>

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const RouteTable = () => {
   let { data, refetch } = useQuery({
@@ -56,7 +57,7 @@ const RouteTable = () => {
     <div>
       <div className="overflow-x-auto">
         <button
-          className="btn btn-accent mb-5"
+          className="btn btn-primary mb-5"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
           Add a route
@@ -161,15 +162,15 @@ const RouteTable = () => {
           </div>
         </dialog>
 
-        <table className="table bg-gray-400">
+        <table className="table bg-white">
           {/* head */}
           <thead>
             <tr>
               <th></th>
-              <th className="text-lg text-white">Route Name</th>
-              <th className="text-lg text-white">Fare</th>
-              <th className="text-lg text-white">Time</th>
-              <th className="text-lg text-white">Action</th>
+              <th className="text-lg text-black">Route Name</th>
+              <th className="text-lg text-black">Fare</th>
+              <th className="text-lg text-black">Time</th>
+              <th className="text-lg text-black">Action</th>
             </tr>
           </thead>
           <tbody>

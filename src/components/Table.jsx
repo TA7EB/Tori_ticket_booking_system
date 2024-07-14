@@ -75,7 +75,7 @@ const Table = () => {
       <div>
         <div className=" w-[80%] mx-auto grid grid-cols-2 gap-6">
           {data.data.map((item, index) => (
-            <div className="border-2 border-[rgba(75,30,133,0.5)] rounded-[1.5em] bg-gradient-to-br from-[#378124d2] to-[rgba(75,30,133,0.01)] text-white font-nunito p-[1em] flex justify-center items-left flex-col gap-[0.75em] backdrop-blur-[12px]">
+            <div className="border-2 border-[rgba(75,30,133,0.5)] rounded-[1.5em] bg-cyan-500 text-white font-nunito p-[1em] flex justify-center items-left flex-col gap-[0.75em] backdrop-blur-[12px]">
               <div>
                 <h1 className="text-[2em] font-medium">{item.boat}</h1>
                 <p className="text-[16px]">Departure Time: {item.dep_time}</p>
