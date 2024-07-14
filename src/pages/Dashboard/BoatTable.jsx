@@ -30,7 +30,10 @@ const BoatTable = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/add_boat?boat_id&boat_name=Tori First Class&boat_type=Speed Boat&boat_capacity=4&owner_id", boatData);
+      await axios.post(
+        "http://127.0.0.1:8000/api/add_boat?boat_id&boat_name=Tori First Class&boat_type=Speed Boat&boat_capacity=4&owner_id",
+        boatData
+      );
 
       toast.success("Boat Added Successfully!!");
 
@@ -106,7 +109,7 @@ const BoatTable = () => {
                   name="boat_type"
                   value={boatData.type}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
               </div>
@@ -141,7 +144,7 @@ const BoatTable = () => {
           </div>
         </dialog>
 
-        <table className="table bg-gray-400">
+        <table className="table bg-gray-300">
           {/* head */}
           <thead>
             <tr>

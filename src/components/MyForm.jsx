@@ -116,10 +116,10 @@ const MyForm = () => {
               <option value="" disabled>
                 Select from where the journey starts
               </option>
-              <option value="Dhamrai">Dhamrai</option>
-              <option value="Ashulia">Ashulia</option>
-              <option value="Charabag">Charabag</option>
-              <option value="Datta Para">Datta Para</option>
+              <option value="DSC">DSC</option>
+              {/* <option value="Ashulia">Ashulia</option>
+              <option value="Charabag">Birulia</option>
+              <option value="Datta Para">Akrain</option> */}
             </select>
           </div>
 
@@ -133,9 +133,9 @@ const MyForm = () => {
               <option value="" disabled>
                 Select where the journey ends
               </option>
-              <option value="Dhanmondi">Dhanmondi</option>
-              <option value="Mirpur">Mirpur</option>
-              <option value="Uttara">Uttara</option>
+              <option value="Ashulia">Ashulia</option>
+              <option value="Birulia">Birulia</option>
+              <option value="Akrain">Akrain</option>
               <option value="Kazipara">Kazipara</option>
             </select>
           </div>

@@ -15,6 +15,9 @@ const RouteTable = () => {
   const [routeData, setRouteData] = useState({
     start: "",
     end: "",
+    fare: "",
+    time: "",
+
   });
 
   const handleChange = (e) => {
@@ -104,6 +107,42 @@ const RouteTable = () => {
                   id="name"
                   name="end"
                   value={routeData.end}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+               Fare
+                </label>
+                <input
+                  type="number"
+                  id="name"
+                  name="fare"
+                  value={routeData.fare}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+               Time
+                </label>
+                <input
+                  type="time"
+                  id="name"
+                  name="time"
+                  value={routeData.time}
                   onChange={handleChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required

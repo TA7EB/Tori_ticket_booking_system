@@ -21,6 +21,8 @@ const Profile = () => {
     navigate("/Login");
   };
 
+  console.log(profileData);
+
   return (
     <div className="w-[80%] mx-auto mt-14 pb-9">
       <h1 className="text-2xl font-bold">
@@ -52,8 +54,8 @@ const Profile = () => {
       </button>
 
       {/* Dashboard */}
-      <div className="mt-[150px]">
-        <Dashboard />
+      <div className={`mt-[150px]`}>
+        {profileData?.isAdmin === 1 && <Dashboard />}
       </div>
     </div>
   );

@@ -3,10 +3,10 @@ const Card = ()=>{
     return(  
 
 
-<div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 h-[50%] bg-white">
+<div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 h-[50%] bg-">
 {/* <!--Card 1--> */}
-<div className="rounded overflow-hidden shadow-lg">
-  <img className="w-[40%] mx-auto  " src="https://i.ibb.co/MsyMjFB/Search.png" alt=""/>
+<div className="rounded overflow-hidden shadow-lg bg-white">
+  <img className="w-[40%] mx-auto  " src="https://i.ibb.co/MsyMjFB/Search.png" />
   <div className="px-6 py-4">
     <div className="font-bold text-xl mb-2">Search</div>
     <p className="text-gray-700 text-base">
@@ -20,7 +20,7 @@ const Card = ()=>{
   </div>
 </div>
 {/* <!--Card 2--> */}
-<div className="rounded overflow-hidden shadow-lg">
+<div className="rounded overflow-hidden shadow-lg bg-white">
   <img className="w-[40%] mx-auto" src="https://i.ibb.co/FbjDg5v/Select.png" alt="River"/>
   <div className="px-6 py-4">
     <div className="font-bold text-xl mb-2">Select</div>
@@ -36,7 +36,7 @@ const Card = ()=>{
 </div>
 
 {/* <!--Card 3--> */}
-<div className="rounded overflow-hidden shadow-lg">
+<div className="rounded overflow-hidden shadow-lg bg-white">
   <img className="w-[40%] mx-auto" src="https://i.ibb.co/t4M1v41/Pay.png" alt="Forest"/>
   <div className="px-6 py-4">
     <div className="font-bold text-xl mb-2">Pay</div>

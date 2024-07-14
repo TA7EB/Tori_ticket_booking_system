@@ -9,7 +9,7 @@ const MainContent = () => {
   const hash = location.hash;
 
   return (
-    <div className="flex-1 p-4 bg-green-300 rounded-e-lg">
+    <div className="flex-1 p-4 bg-[#065f46] rounded-e-lg">
       <h2 className="text-3xl font-bold mb-4">Welcome to the Dashboard</h2>
 
       <div>
